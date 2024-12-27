@@ -25,6 +25,7 @@
 #include "qcustomplot.h"
 #include "graphstyledialog.h"
 #include "plotdatadialog.h"
+#include "labelaxisdialog.h"
 
 namespace Ui {
 class GraphWindow;
@@ -60,7 +61,10 @@ private:
     QAction* actionAddData = new QAction("Add Data", this);
 
     // other actions
-    QAction* actionEditStyle=new QAction("Edit Style", this);
+    QAction* actionEditStyle=new QAction("Edit style", this);
+
+    // edit and label x and y axis
+    QAction* actionLabelAxis= new QAction("Label Axis", this);
 
     void contextMenuEvent(QContextMenuEvent *event);
     void ConstructContextMenu(QMenu *);
@@ -69,6 +73,7 @@ private slots:
     void ChangeGraphStyle(QCPGraph * graph, QPen* pen);
     void OpenGraphStyleDialog();
     void OpenPlotDataDialog();
+    void OpenLabelAxisDialog();
     void receiveAllDataSets(QList<DataSet*> receivedDataSets);
     void receiveChosenDataSet(DataSet* chosenDataSet);
 

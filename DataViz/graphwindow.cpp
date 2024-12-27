@@ -11,6 +11,9 @@ GraphWindow::GraphWindow(DataSet *DataSet, QWidget *parent) :
     ui(new Ui::GraphWindow)
 {
     ui->setupUi(this);
+    actionEditStyle->setEnabled(true);
+    actionAddData->setEnabled(true);
+    actionLabelAxis->setEnabled(true);
 
     // Increment the figure counter:
     FigureCounter++;
@@ -30,6 +33,8 @@ GraphWindow::GraphWindow(DataSet *DataSet, QWidget *parent) :
     // connect context menu actions signals and slots
     connect(actionEditStyle,SIGNAL(triggered()),this,SLOT(OpenGraphStyleDialog()));
     connect(actionAddData,SIGNAL(triggered()),this,SLOT(OpenPlotDataDialog()));
+    connect(actionLabelAxis,SIGNAL(triggered()),this,SLOT(OpenLabelAxisDialog()));
+
 
     // connect signals and slots for accessing datasets
     connect(this, SIGNAL(requestAllDataSets_SIGNAL()), parent, SLOT(receiveAllDataSetsRequest()));
@@ -45,6 +50,7 @@ GraphWindow::GraphWindow(DataSet *DataSet, int numBins, QString histPlotName, QW
 
     actionEditStyle->setEnabled(false);
     actionAddData->setEnabled(false);
+    actionLabelAxis->setEnabled(false);
 
     // Increment the figure counter:
     FigureCounter++;
@@ -80,6 +86,7 @@ GraphWindow::~GraphWindow()
 { // Called when the window of the figure is closed
     delete actionEditStyle;
     delete actionAddData;
+    delete actionLabelAxis;
     delete ContextMenu;
     delete ui;
 }
@@ -93,9 +100,11 @@ void GraphWindow::ConstructContextMenu(QMenu *)
 {// This function is called in the constructor to build the context menu so that it does not need to be built everytime from scratch
     actionEditStyle->setIcon(QIcon(":/icons/edit.svg"));
     actionAddData->setIcon(QIcon(":/icons/graph.svg"));
+    actionLabelAxis->setIcon(QIcon(":/icons/plot.svg"));
 
     ContextMenu->addAction(actionEditStyle); // Add action
     ContextMenu->addAction(actionAddData); // Add sub menu
+    ContextMenu->addAction(actionLabelAxis); //Add label
 }
 
 void GraphWindow::SetGraphSetting(DataSet *DataSet)
@@ -223,6 +232,15 @@ void GraphWindow::OpenPlotDataDialog()
     PlotData_dlg->exec();
     delete PlotData_dlg;
 }
+
+void GraphWindow::OpenLabelAxisDialog()
+{
+    // 空函数体，确保信号和槽连接正确
+    labelAxisDialog* labelAxisDialog_dig = new labelAxisDialog(this);
+    labelAxisDialog_dig->exec();
+    delete labelAxisDialog_dig;
+}
+
 
 void GraphWindow::receiveChosenDataSet(DataSet* chosenDataSet)
 {
