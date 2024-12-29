@@ -113,6 +113,21 @@ QString DataSet::getDescription()
     return DataSetDescription;
 }
 
+QString DataSet::getNameOfColumn1(){
+    return NameOfColumn1;
+}
+
+QString DataSet::getNameOfColumn2(){
+    return NameOfColumn2;
+};
+
+void DataSet::setNameOfColumn1(QString* Column1){
+    NameOfColumn1 = *Column1;
+}
+void DataSet::setNameOfColumn2(QString* Column2){
+    NameOfColumn2 = *Column2;
+}
+
 
 void DataSet::setName(QString* name)
 {// Function to set the name of the dataset

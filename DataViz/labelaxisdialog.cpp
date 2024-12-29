@@ -6,7 +6,10 @@ labelAxisDialog::labelAxisDialog(QWidget *parent)
     , ui(new Ui::labelAxisDialog)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Add Data To Plot");
+    this->setWindowTitle("Label axis and scale");
+
+    ui->textEdit->setText("x");
+    ui->textEdit_2->setText("y");
 }
 
 labelAxisDialog::~labelAxisDialog()
@@ -17,11 +20,12 @@ labelAxisDialog::~labelAxisDialog()
 void labelAxisDialog::on_buttonBox_accepted()
 {
 
+    labelAxisDialog::close();
 }
 
 
 void labelAxisDialog::on_buttonBox_rejected()
 {
-
+    labelAxisDialog::close();
 }
 

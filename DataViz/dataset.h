@@ -28,6 +28,8 @@ private:
     double DataPoint[2]; // An array containing the information of 2 datapoints
     gsl_matrix *Matrix; // GSL Matrix object to store the data
     static int DataSetCounter; // Number of Datasets in the app at any moment ( defined as static because it is shared among all objects of this class)
+    QString NameOfColumn1 = "x";
+    QString NameOfColumn2 = "y";
     QString DataSetName; // Name of the Dataset
     QString DataSetDescription; //Description of Dataset
 
@@ -35,6 +37,10 @@ public:
     DataSet(QString& FileName); // Create a new dataset by loading a file
     DataSet(QVector<QPointF> dataIn); // Creating a new dataset by function evaluation
     int Size(); // function to get the size of the dataset (currenlty the number of rows only)
+    QString getNameOfColumn1();
+    void setNameOfColumn1(QString* Column1);
+    QString getNameOfColumn2();
+    void setNameOfColumn2(QString* Column2);
     QString getName(); // Function to get the name of the dataset
     void setName(QString* name);
     QString getDescription();
